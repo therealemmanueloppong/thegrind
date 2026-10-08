@@ -301,3 +301,28 @@ def infection_spread_one_step_reference(grid):
 # Key rule: read the ORIGINAL to decide which cells may spread this step.
 # The healthy-neighbor test can read original or copy in this H/I version;
 # updating an already infected neighbor again makes no difference.
+
+
+# =====================================================================
+# QUESTION 1: Repeatedly Delete Leaves Matching a Target Value
+# =====================================================================
+# Tree-node interface, as we practiced. The PDF's main interface is a
+# level-order list; that interface additionally needs decoding and encoding.
+# Brute force: repeatedly scan and delete current matching leaves.
+# Time O(n * h), worst O(n^2); DFS scan space O(h).
+# Better: children first, then decide whether the parent is now deletable.
+# Time O(n); extra space O(h). Return None to delete, or node to keep.
+
+
+def remove_target_leaves_reference(root, target):
+    if root is None:
+        return None
+    root.left = remove_target_leaves_reference(root.left, target)
+    root.right = remove_target_leaves_reference(root.right, target)
+    if root.left is None and root.right is None and root.val == target:
+        return None
+    return root
+
+
+# Example: root 7 with left child 7 and right child 3 => keep root and 3.
+# Your own recursive and iterative solutions remain in study.py.

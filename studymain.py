@@ -28,36 +28,6 @@ from heapq import heappop, heappush
 
 
 # =====================================================================
-# QUESTION 1: Repeatedly Delete Leaves Matching a Target Value
-# =====================================================================
-# Tree-node interface, as we practiced. The PDF's main interface is a
-# level-order list; that interface additionally needs decoding and encoding.
-# Brute force: repeatedly scan and delete current matching leaves.
-# Time O(n * h), worst O(n^2); DFS scan space O(h).
-# Better: children first, then decide whether the parent is now deletable.
-# Time O(n); extra space O(h). Return None to delete, or node to keep.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
-def remove_target_leaves_reference(root, target):
-    if root is None:
-        return None
-    root.left = remove_target_leaves_reference(root.left, target)
-    root.right = remove_target_leaves_reference(root.right, target)
-    if root.left is None and root.right is None and root.val == target:
-        return None
-    return root
-
-
-# Example: root 7 with left child 7 and right child 3 => keep root and 3.
-# Your own recursive and iterative solutions remain in study.py.
-
-
-# =====================================================================
 # QUESTION 3: Find minimum threshold enabling grid path
 # =====================================================================
 # Four-direction path from top-left to bottom-right.
