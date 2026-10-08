@@ -192,3 +192,112 @@ if __name__ == "__main__":
     result = remove_target_leaves(root, target)
     # Expected: the root 7 stays, its left child disappears,
     # and its right child 3 stays.
+
+
+# =====================================================================
+# QUESTION 2: Infection Spread on a Grid (Cellular Automaton)
+# COMPLETED PRACTICE QUESTION
+# Baseline: copy then scan every cell and its four neighbors. For ONE
+# step this is already O(R*C) time and space.
+# For many steps, repeated full scans cost O(steps*R*C); a BFS frontier
+# can avoid rescanning unchanged cells. We will study that extension later.
+# =====================================================================
+# We start with the PDF's supplied solution and sample cases: ONE step.
+# Input: a rectangular list of strings; H = healthy, I = infected.
+# A healthy cell becomes infected if a neighbor ABOVE, BELOW, LEFT,
+# or RIGHT was infected at the START of this step. No diagonal spread.
+# All changes happen simultaneously: newly infected cells do not spread
+# again during the same step. Return the resulting list of strings.
+# Existing infected cells stay infected. Empty input returns [].
+# Multi-step spread and recovery are extensions to study afterward.
+
+
+def infection_spread_one_step(grid: list[str]) -> list[str]:
+    def inbounds(r,c):
+        return 0<= r < len(grid) and 0<=c < len(grid[0])
+    if not grid:
+        return []
+
+    rows, cols = len(grid), len(grid[0])
+    ans = [list(row) for row in grid]
+
+
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 'H':
+                continue
+
+            for dr,dc in ((1,0), (-1,0),(0,1),(0,-1)):
+                nr = dr+r
+                nc = dc+c
+
+                if inbounds(nr,nc) and grid[nr][nc] == 'H':
+                    ans[nr][nc] = "I"
+
+    ans = [''.join(row) for row in ans]
+    return ans
+
+
+
+
+
+
+# Sample 1:
+# Input:    ["HHH", "HIH", "HHH"]
+# Expected: ["HIH", "III", "HIH"]
+#
+# Sample 2:
+# Input:    ["HHH"]
+# Expected: ["HHH"]
+#
+# Sample 3 (shows why newly infected cells must wait until the next step):
+# Input:    ["IHH"]
+# Expected: ["IIH"]
+#
+# When your solution is ready, try:
+# print(infection_spread_one_step(["HHH", "HIH", "HHH"]))
+
+
+# QUESTION 2: Interview reference - one simultaneous spread step.
+# Read from grid; write to result. Time and space: O(rows * cols).
+def infection_spread_one_step_reference(grid):
+    if not grid:
+        return []
+
+    rows = len(grid)
+    cols = len(grid[0])
+    result = [list(row) for row in grid]
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] != "I":
+                continue
+
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nr = r + dr
+                nc = c + dc
+
+                if 0 <= nr < rows and 0 <= nc < cols:
+                    if grid[nr][nc] == "H":
+                        result[nr][nc] = "I"
+
+    return ["".join(row) for row in result]
+
+
+# COMPARISON WITH YOUR SOLUTION ABOVE
+# Correctness: both produce the same one-step grid and preserve the input.
+# Efficiency: both O(rows * cols) time and space; no algorithmic upgrade needed.
+# Your inbounds helper is a good way to name and reuse the boundary check.
+# Optional: define it after rows/cols and use those names instead of len(grid).
+# Your "skip H" is correct for H/I input. "Skip anything that is not I"
+# makes the spreading rule explicit, useful if barriers are later introduced.
+# That alone does not implement recovery or other follow-up state rules.
+# Your separate conversion and return are correct and easy to read.
+# The reference combines them into one return; shorter is not always clearer.
+# Optional clarity: result or next_grid describes the copy better than ans.
+# Add spaces around operators and after commas; remove extra blank lines and
+# the stale TODO once satisfied. These are readability changes, not bug fixes.
+# Key rule: read the ORIGINAL to decide which cells may spread this step.
+# The healthy-neighbor test can read original or copy in this H/I version;
+# updating an already infected neighbor again makes no difference.
