@@ -15,8 +15,8 @@
 # Learn the cost rule and traversal order first, then rebuild the code.
 
 # HARD SECTION 1: BFS/DFS, Graph & Tree Traversal, Shortest Paths
-# Hard questions in the PDF's order. Current question: 3.
-# Completed question 2 is archived with its notes in study.py.
+# Hard questions in the PDF's order. Current question: 4.
+# Completed questions 1-3 are archived with their notes in study.py.
 # Keep these references to read, then delete a function's body and rebuild it.
 # When satisfied, copy the completed question into study.py for revision.
 # These are the main problems; extra follow-ups are labeled separately.
@@ -25,43 +25,6 @@
 
 from collections import defaultdict
 from heapq import heappop, heappush
-
-
-# =====================================================================
-# QUESTION 3: Find minimum threshold enabling grid path
-# =====================================================================
-# Four-direction path from top-left to bottom-right.
-# Path cost = largest CELL VALUE visited, including the start.
-# This differs from the follow-up minimizing adjacent height differences.
-# Brute force: enumerate simple paths, exponential time, O(R*C) space.
-# Better: Dijkstra, with max instead of addition when extending a path.
-# Time O(R*C log(R*C)); space O(R*C). Empty grid returns 0 here.
-# Heap task: (best maximum so far, row, column).
-def minimum_grid_threshold(grid):
-    if not grid or not grid[0]:
-        return 0
-    rows = len(grid)
-    cols = len(grid[0])
-    best = [[float("inf")] * cols for _ in range(rows)]
-    best[0][0] = grid[0][0]
-    heap = [(grid[0][0], 0, 0)]
-    while heap:
-        cost, r, c = heappop(heap)
-        if cost != best[r][c]:
-            continue  # An older task was replaced by a better route.
-        if (r, c) == (rows - 1, cols - 1):
-            return cost
-        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-            nr, nc = r + dr, c + dc
-            if 0 <= nr < rows and 0 <= nc < cols:
-                new_cost = max(cost, grid[nr][nc])
-                if new_cost < best[nr][nc]:
-                    best[nr][nc] = new_cost
-                    heappush(heap, (new_cost, nr, nc))
-
-
-# Example: minimum_grid_threshold([[0,2],[1,3]]) => 3
-# Questions 3, 5 part 1, and 7 use the same maximum-cell pattern.
 
 
 # =====================================================================

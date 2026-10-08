@@ -326,3 +326,130 @@ def remove_target_leaves_reference(root, target):
 
 # Example: root 7 with left child 7 and right child 3 => keep root and 3.
 # Your own recursive and iterative solutions remain in study.py.
+
+
+# =====================================================================
+# QUESTION 3: Find minimum threshold enabling grid path
+# =====================================================================
+# Four-direction path from top-left to bottom-right.
+# Path cost = largest CELL VALUE visited, including the start.
+# This differs from the follow-up minimizing adjacent height differences.
+# Brute force: enumerate simple paths, exponential time, O(R*C) space.
+# Better: Dijkstra, with max instead of addition when extending a path.
+# Time O(R*C log(R*C)); space O(R*C). Empty grid returns 0 here.
+# Heap task: (best maximum so far, row, column).
+from heapq import heappush, heappop
+def minimum_grid_threshold(grid):
+    def inbounds(r,c):
+        return 0<= r < len(grid) and 0<=c<len(grid[0])
+
+    dirs = [(1,0),(0,1), (-1,0),(0,-1)]
+
+    if not grid or not grid[0]:
+        return 0
+
+    rows, cols = len(grid), len(grid[0])
+    best = [[float('inf')]* cols for r in range(rows)]
+    best[0][0] = grid[0][0]
+    heap = [(best[0][0],0,0)]
+    while heap:
+        score, r,c = heappop(heap)
+        if best[r][c] !=  score:
+            continue
+
+        if (r,c) == (rows-1, cols-1):
+            return score
+
+        for dr,dc in dirs:
+            nr,nc = r+dr, c+dc
+            if inbounds(nr, nc):
+                newscore = max(grid[nr][nc], score)
+                if newscore < best[nr][nc]:
+                    best[nr][nc] = newscore
+
+                    heappush(heap, (newscore, nr,nc))
+
+
+# Example: minimum_grid_threshold([[0,2],[1,3]]) => 3
+# Questions 3, 5 part 1, and 7 use the same maximum-cell pattern.
+
+
+# QUESTION 3: REFERENCE FOR COMPARISON
+# Both solutions use the same algorithm and have the same complexity:
+# time O(R*C log(R*C)), space O(R*C).
+# Your inbounds helper and separate dirs list are useful readability choices.
+# score/newscore and cost/new_cost are equivalent names, not logic differences.
+# max(height, score) equals max(score, height): argument order does not matter.
+# Compare: calculate this route with MAX, then accept a SMALLER neighbor score.
+# Keep score first in heap tuples; record best before pushing the new task.
+# Optional polish: consistent spaces, remove the stale practice comment, and
+# keep heap imports once at the top (they are already there).
+
+def minimum_grid_threshold_reference(grid):
+    if not grid or not grid[0]:
+        return 0
+    rows = len(grid)
+    cols = len(grid[0])
+    best = [[float("inf")] * cols for _ in range(rows)]
+    best[0][0] = grid[0][0]
+    heap = [(grid[0][0], 0, 0)]
+    while heap:
+        cost, r, c = heappop(heap)
+        if cost != best[r][c]:
+            continue  # An older task was replaced by a better route.
+        if (r, c) == (rows - 1, cols - 1):
+            return cost
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols:
+                new_cost = max(cost, grid[nr][nc])
+                if new_cost < best[nr][nc]:
+                    best[nr][nc] = new_cost
+                    heappush(heap, (new_cost, nr, nc))
+
+
+# QUESTION 3: SIMPLE ASSERT TESTS FOR INTERVIEW DAY
+# Choose an input, work out its expected answer by hand, then assert equality.
+# If an assert is false, Python stops with AssertionError at that test.
+# Cover a normal case, the smallest input, and a tricky route; explain why.
+# Empty-grid tests apply to our agreed convention that the answer is 0.
+# Run this file to execute the assertions below.
+if __name__ == "__main__":
+    # Normal case: both routes have largest value 3.
+    assert minimum_grid_threshold([[0, 2], [1, 3]]) == 3
+
+    # Smallest grid: its starting cell is also the goal.
+    assert minimum_grid_threshold([[7]]) == 7
+
+    # Tricky route: go around 100; the best route's largest value is 2.
+    assert minimum_grid_threshold([[0, 100, 2],
+                                   [1,   2, 2],
+                                   [3,   4, 1]]) == 2
+
+    # One row: the middle cell cannot be avoided.
+    assert minimum_grid_threshold([[1, 8, 2]]) == 8
+
+    # One column: every cell is required.
+    assert minimum_grid_threshold([[1], [6], [2]]) == 6
+
+    # Equal heights: the limit equals that shared height.
+    assert minimum_grid_threshold([[4, 4], [4, 4]]) == 4
+
+    # Empty inputs: the convention used in our practice solution.
+    assert minimum_grid_threshold([]) == 0
+    assert minimum_grid_threshold([[]]) == 0
+
+    print("All question-three tests passed.")
+
+
+# QUESTION 3: REVISION NOTES FROM OUR DISCUSSION
+# A min-heap of tuples compares the first item first: put the priority score
+# before row/column; coordinates break ties. A stale entry is an old task
+# whose score no longer matches best[r][c]; skip it to avoid redundant work.
+# The route score is a MAX within a path; choose the MIN across possible paths.
+# best can be a rectangular table or a dictionary keyed by (row, column).
+# A table is straightforward for a dense grid. A dictionary stores discovered
+# cells only, but keys and hash-table bookkeeping add overhead per entry.
+# Both have O(R*C) worst-case storage; a sparse dictionary may store fewer cells.
+# [[1], [6], [2]] is three rows, one column: only route 1 -> 6 -> 2, answer 6.
+# Passing a grid literal directly to a function is valid; name it when helpful.
