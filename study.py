@@ -33,7 +33,7 @@ def remove_target_leaves(root, target):
 
 
 
-def remove_target_leaves2(root, target):
+def remove_target_leaves_iterative(root, target):
     # A leaf has neither a left child nor a right child.
     def isleaf(node):
         return node.left is None and node.right is None
