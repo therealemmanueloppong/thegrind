@@ -55,7 +55,7 @@ def tree_distance_sums(n, edges):
             size[node] += size[child]
             answer[node] += answer[child] + size[child]
 
-    def reroot(node, parent):
+    def reroot(node, parent): 
         for child in graph[node]:
             if child == parent:
                 continue
