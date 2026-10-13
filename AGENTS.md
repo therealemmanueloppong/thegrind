@@ -8,7 +8,7 @@ This chat studies only `Google Questions - 2 column - 1 - Last 30 days.pdf`
 1. Learning pass: cover the MAIN problem for all 26 questions in order.
    Explain the input/output, brute force, and optimal solution simply and slowly.
    Guide Emmanuel with one small question at a time while he writes code.
-   Read the latest saved file whenever asked to review; never guess its contents.
+   Read the latest saved file whenever asked to review; never guess its contents. Before preparing the next question, verify its exact title, wording, and examples directly in the PDF.
    Review the implementation and guide him to write his own direct assert tests.
 2. Independent assessment pass: after learning all 26 mains, return to question 1
    and cover all 26 mains again in order. Emmanuel codes each solution from scratch
@@ -23,12 +23,12 @@ This chat studies only `Google Questions - 2 column - 1 - Last 30 days.pdf`
 
 ## Files and current progress
 
-- study.py: active practice file. Contains question 6's skeleton, ready for practice.
-- studied.py: archive of completed MAIN solutions for questions 1, 2, 3, 4, and 5,
+- study.py: active practice file. Contains question 7's skeleton, ready for practice.
+- studied.py: archive of completed MAIN solutions for questions 1 through 6,
   with passing user-written assertions for each. Append completed work;
   never replace earlier archived solutions.
-- Pass 1 is active. Main questions 1–5 are complete.
-- Next: question 6 (Number of Islands), MAIN problem only.
+- Pass 1 is active. Main questions 1–6 are complete.
+- Next: question 7 (Path Minimizing the Maximum Cell (Swim in Rising Water)), MAIN problem only.
 - Question 3 used the PDF's TWO-LIST ordering variant can_merge_orders(a, b).
 - Do not recreate studymain.py or the720main.py unless asked.
 - Keep this progress updated when a question or pass is completed.

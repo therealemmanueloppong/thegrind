@@ -183,7 +183,7 @@ def can_merge_orders(a, b):
         order.append(node)
 
         for nb in G[node]:
-            indegree[nb] -=1 
+            indegree[nb] -=1
             if indegree[nb] == 0:
                 q.append(nb)
 
@@ -322,4 +322,101 @@ if __name__ == "__main__":
     assert longest_with_one_change(nums) == 4
     nums = [4, 3, 2, 1]
     assert longest_with_one_change(nums) == 2
+
+
+
+========================================================================
+
+# Question 6: Number of Islands
+# MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
+#
+# Given a grid containing '1' for land and '0' for water, count the number of
+# islands. An island is a group of land cells connected up, down, left, or
+# right. Diagonal contact does not count.
+
+
+def num_islands(grid):
+    # TODO: Build the main solution with guided questions.
+    dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+    def inbounds(r,c):
+        return 0<=r<rows and 0<=c<cols
+
+    def dfs(r,c):
+        if not inbounds(r,c):
+            return
+
+        if grid[r][c] == '0':
+            return
+
+        grid[r][c] = '0'
+        for dr, dc in dirs:
+            nr, nc = r+dr, c+dc
+            if inbounds(nr,nc):
+                dfs(nr, nc)
+
+    rows = len(grid)
+
+    if rows == 0:
+        return 0
+
+    cols = len(grid[0])
+
+    if cols == 0:
+        return 0
+
+    count = 0
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                count += 1
+                dfs(r,c)
+
+    return count
+
+
+if __name__ == "__main__":
+    # Test 1: the example grid has two islands.
+    # grid = [
+    #     ['1', '1', '0', '0'],
+    #     ['1', '0', '0', '1'],
+    #     ['0', '0', '1', '1'],
+    # ]
+    # Expected result: 2
+    grid = [
+        ['1', '1', '0', '0'],
+        ['1', '0', '0', '1'],
+        ['0', '0', '1', '1'],
+    ]
+    assert(num_islands(grid)) == 2
+
+    # Test 2: an empty grid has no islands.
+    # grid = []
+    # Expected result: 0
+    grid = []
+    assert(num_islands(grid)) == 0
+
+    # Test 3: a grid with rows but no columns has no islands.
+    # grid = [[]]
+    # Expected result: 0
+    grid = [[]]
+    assert(num_islands(grid)) == 0
+
+    # Test 4: all water means no islands.
+    # grid = [['0', '0'], ['0', '0']]
+    # Expected result: 0
+    grid = [['0', '0'], ['0', '0']]
+    assert(num_islands(grid)) == 0
+
+    # Test 5: all land connected together is one island.
+    # grid = [['1', '1'], ['1', '1']]
+    # Expected result: 1
+    grid = [['1', '1'], ['1', '1']]
+    assert(num_islands(grid)) == 1
+
+
+    # Test 6: diagonal land cells do not connect.
+    # grid = [['1', '0'], ['0', '1']]
+    # Expected result: 2
+    grid = [['1', '0'], ['0', '1']]
+    assert(num_islands(grid)) == 2
 
