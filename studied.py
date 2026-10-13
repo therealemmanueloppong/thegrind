@@ -278,3 +278,48 @@ if __name__ == "__main__":
     ans = arrange_crops(2, 2, [4])
     assert ans == [[1, 1], [1, 1]]
 
+
+# ============================================================
+# QUESTION 5: LONGEST NON-DECREASING SUBARRAY WITH ONE CHANGE
+# ============================================================
+def longest_with_one_change(nums):
+    if not nums:
+        return 0
+
+    n = len(nums)
+    if n <= 2:
+        return n
+
+    left = [1] * n
+    right = [1] * n
+    for i in range(1, n):
+        if nums[i] >= nums[i - 1]:
+            left[i] = left[i - 1] + 1
+
+    for i in reversed(range(n - 1)):
+        if nums[i] <= nums[i + 1]:
+            right[i] = right[i + 1] + 1
+
+    best = 1
+    for i in range(n):
+        leftval = left[i - 1] if i > 0 else 0
+        rightval = right[i + 1] if i < n - 1 else 0
+        if i == 0 or i == n - 1 or nums[i - 1] <= nums[i + 1]:
+            ans = leftval + rightval + 1
+        else:
+            ans = max(leftval, rightval) + 1
+        best = max(best, ans)
+
+    return best
+
+
+if __name__ == "__main__":
+    nums = [1, 0, 3, 4, 5, 2, 3]
+    assert longest_with_one_change(nums) == 5
+    nums = []
+    assert longest_with_one_change(nums) == 0
+    nums = [1, 2, 3, 4]
+    assert longest_with_one_change(nums) == 4
+    nums = [4, 3, 2, 1]
+    assert longest_with_one_change(nums) == 2
+

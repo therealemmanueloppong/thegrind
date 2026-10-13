@@ -23,12 +23,12 @@ This chat studies only `Google Questions - 2 column - 1 - Last 30 days.pdf`
 
 ## Files and current progress
 
-- study.py: active practice file. Contains question 5's skeleton, ready for practice.
-- studied.py: archive of completed MAIN solutions for questions 1, 2, 3, and 4,
+- study.py: active practice file. Contains question 6's skeleton, ready for practice.
+- studied.py: archive of completed MAIN solutions for questions 1, 2, 3, 4, and 5,
   with passing user-written assertions for each. Append completed work;
   never replace earlier archived solutions.
-- Pass 1 is active. Main questions 1–4 are complete.
-- Next: question 5 (Longest Non-Decreasing Subarray with One Replacement), MAIN problem only.
+- Pass 1 is active. Main questions 1–5 are complete.
+- Next: question 6 (Number of Islands), MAIN problem only.
 - Question 3 used the PDF's TWO-LIST ordering variant can_merge_orders(a, b).
 - Do not recreate studymain.py or the720main.py unless asked.
 - Keep this progress updated when a question or pass is completed.
