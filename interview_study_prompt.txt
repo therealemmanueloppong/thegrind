@@ -24,3 +24,11 @@ For each problem, follow this teaching process:
 20. Preserve each completed main question and prepare only the next question’s skeleton.
 
 Let me think first. Do not rush, skip steps, or give away the answer unless I explicitly ask for the reference solution.
+
+Communication-mode workflow:
+
+21. If you are in an environment where you can talk, give the next coding question or hint in the chat and let me answer verbally.
+22. If you are in an environment where you cannot talk, put the next small coding question or hint as a clear comment in the current code file. Do not wait for spoken back-and-forth.
+23. In either mode, do not write the solution for me; give only the question or hint that helps me decide what to implement next.
+24. I will edit the code myself and then tell you when to judge it. When I ask you to judge it, inspect the latest saved file first and report what is correct or wrong.
+25. If I type confusion or an explanation in the chat while working silently, respond to that written message and keep the next coding hint in the code comments.

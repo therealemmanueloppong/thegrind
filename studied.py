@@ -325,7 +325,7 @@ if __name__ == "__main__":
 
 
 
-========================================================================
+# ========================================================================
 
 # Question 6: Number of Islands
 # MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
@@ -420,3 +420,261 @@ if __name__ == "__main__":
     grid = [['1', '0'], ['0', '1']]
     assert(num_islands(grid)) == 2
 
+
+
+# ========================================================================
+
+# Question 7: Path Minimizing the Maximum Cell (Swim in Rising Water)
+# MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
+#
+# You are given an n x n grid of elevations. Water rises over time. At time t,
+# you may stand on cells whose elevation is at most t and move up, down, left,
+# or right between reachable cells. Return the minimum time needed to reach the
+# bottom-right cell from the top-left cell.
+#
+# Example 1:
+# grid = [[0, 2], [1, 3]]
+# Expected result: 3
+# The destination cannot be reached until the water level reaches elevation 3.
+#
+# Example 2:
+# grid = [
+#     [0, 1, 2, 3, 4],
+#     [24, 23, 22, 21, 5],
+#     [12, 13, 14, 15, 16],
+#     [11, 17, 18, 19, 20],
+#     [10, 9, 8, 7, 6],
+# ]
+# Expected result: 16
+# The route reaches the destination when the largest elevation on the best
+# route is 16.
+#
+# Constraints from the question:
+# - The grid is n x n.
+# - 1 <= n <= 50.
+# - Elevations are unique integers from 0 through n*n - 1.
+
+from heapq import heappop, heappush
+def swim_in_water(grid):
+    # TODO: Build the main solution with guided questions.
+    def inbounds(r,c):
+        return 0<=r<rows and 0<=c<cols
+    rows = len(grid)
+    cols = len(grid[0])
+    dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+
+    best = [(grid[0][0], 0,0)]
+    visited = set()
+    ans = grid[0][0]
+    visited.add((0,0))
+    while best:
+        score, r, c = heappop(best)
+        ans = max(ans, score)
+        if (r,c) == (rows-1, cols-1):
+            return ans
+
+        for dr, dc in dirs:
+            nr, nc = r+dr, c+dc
+            if inbounds(nr, nc):
+                if (nr,nc) not in visited:
+                    visited.add((nr,nc))
+                    heappush(best, (grid[nr][nc], nr, nc))
+
+
+if __name__ == "__main__":
+    # Test 1: the first PDF example.
+    grid = [[0, 2], [1, 3]]
+    assert swim_in_water(grid) == 3
+
+    # Test 2: the second PDF example.
+    grid = [
+        [0, 1, 2, 3, 4],
+        [24, 23, 22, 21, 5],
+        [12, 13, 14, 15, 16],
+        [11, 17, 18, 19, 20],
+        [10, 9, 8, 7, 6],
+    ]
+    assert swim_in_water(grid) == 16
+
+    # Test 3: a one-cell grid is already at the destination.
+    assert swim_in_water([[7]]) == 7
+
+    # Test 4: a simple increasing route.
+    assert swim_in_water([[0, 1], [2, 3]]) == 3
+
+# Question 8: Shortest Path Nodes and Escaping a Pursuer
+# MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
+#
+# Main question: Given an unweighted, undirected graph, Alice starts at one
+# node and must reach a target node. Return the length of Alice's shortest path.
+# Use BFS because every edge has equal cost.
+#
+# Example:
+# graph = {0: [1, 2], 1: [0, 2], 2: [0, 1, 3], 3: [2]}
+# start = 0
+# target = 3
+# Expected result: 2
+# One shortest route is 0 -> 2 -> 3.
+#
+# The PDF also lists follow-ups, but they come only after all 26 main questions:
+# - Find every node that lies on at least one shortest path.
+# - Decide whether Alice can reach the target safely while Bob pursues her.
+
+from collections import deque
+
+def shortest_path_length(graph, start, target):
+    # TODO: Build the main solution with guided questions.
+    def bfs(graph):
+        q= deque([(start,0)]) #2nd number is diatance so far from Alice's node
+        visited = {start}
+        while q:
+            node, distance = q.popleft()
+            if node ==  target:
+                return distance
+
+            for nb in graph[node]:
+                if nb not in visited:
+                    visited.add(nb)
+                    q.append((nb, distance+1))
+
+
+
+        return -1
+
+    ans = bfs(graph)
+    return ans
+
+
+if __name__ == "__main__":
+    # Test 1: a direct edge.
+    graph = {0: [1], 1: [0]}
+    assert shortest_path_length(graph, 0, 1) == 1
+
+    # Test 2: the example has a two-edge shortest path.
+    graph = {0: [1, 2], 1: [0, 2], 2: [0, 1, 3], 3: [2]}
+    assert shortest_path_length(graph, 0, 3) == 2
+
+    # Test 3: start and target are the same node.
+    assert shortest_path_length({0: []}, 0, 0) == 0
+
+    # Test 4: the target is unreachable.
+    graph = {0: [1], 1: [0], 2: []}
+    assert shortest_path_length(graph, 0, 2) == -1
+
+    pass
+
+# Question 9: Meeting Rooms / Interval Scheduling Variants
+# MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
+#
+# Main question: Given meeting intervals [start, end], return the minimum
+# number of rooms needed so that no overlapping meetings share a room.
+# Intervals use half-open timing: a meeting ending at time t does not overlap
+# one starting at time t.
+#
+# Example 1:
+# intervals = [[0, 30], [5, 10], [15, 20]]
+# Expected result: 2
+# Two rooms are needed because [0, 30] overlaps each of the other meetings,
+# while the last two meetings do not overlap each other.
+#
+# Example 2:
+# intervals = [[7, 10], [2, 4]]
+# Expected result: 1
+# These meetings do not overlap, so one room is enough.
+#
+# The PDF also lists interval-scheduling variants and follow-ups, but they come
+# only after all 26 main questions.
+
+from heapq import heappop, heappush
+
+def min_meeting_rooms(intervals):
+    # TODO: Build the main solution with guided questions.
+    if len(intervals) == 0:
+        return 0
+
+    intervals.sort(key = lambda x:x[0])
+    heap = []
+    ans = 1
+    heappush(heap, intervals[0][1])
+    # Hint: keep a variable for the largest heap size seen so far.
+    for i in range(1, len(intervals)):
+        curintervalstart = intervals[i][0]
+        # TODO: keep releasing rooms only while the heap is nonempty and its earliest end is <= the current start.
+        # Hint: read heap[0] directly in the condition; do not read heap[0] after a pop that may empty the heap.
+        while heap  and curintervalstart >= heap[0]:
+            heappop(heap)
+
+        heappush(heap, intervals[i][1])
+        # Hint: after each push, compare the current heap size with your best so far.
+        ans = max(ans, len(heap))
+        
+
+
+    # Hint: return the peak room count, not only the final heap size.
+    return ans
+
+
+
+if __name__ == "__main__":
+    # Test 1: canonical overlapping-meetings example.
+    intervals = [[0, 30], [5, 10], [15, 20]]
+    assert min_meeting_rooms(intervals) == 2
+
+    # Test 2: two non-overlapping meetings need one room.
+    intervals = [[7, 10], [2, 4]]
+    assert min_meeting_rooms(intervals) == 1
+
+    # Test 3: touching endpoints do not overlap.
+    intervals = [[1, 3], [3, 5]]
+    assert min_meeting_rooms(intervals) == 1
+
+    # Test 4: no meetings need zero rooms.
+    assert min_meeting_rooms([]) == 0
+
+    pass
+
+# Question 10: Range Duplicate Check with Constant-Time Queries
+# MAIN QUESTION ONLY. Follow-ups come after both main-question passes.
+#
+# Main question: Given an array and an inclusive range [l, r], determine
+# whether every element in that range is unique.
+#
+# The question progresses from a set-based check for one range toward many
+# read-heavy range queries, where preprocessing should make each query O(1).
+# We will first implement and understand the single-range check.
+#
+# Example:
+# values = [1, 2, 3, 1, 4]
+# [0, 2] contains 1, 2, 3, so the answer is True.
+# [0, 3] contains 1 twice, so the answer is False.
+#
+# The PDF also lists preprocessing, updates, and follow-ups. They come only
+# after all 26 main questions.
+
+def range_is_unique(values, left, right):
+    # TODO: Build the main solution with guided questions.
+    seen = set()
+    for i in range(left, right+1):
+        if values[i] in seen:
+            return False
+        seen.add(values[i])
+
+    return True
+
+
+if __name__ == "__main__":
+    # Test 1: a range with all distinct values.
+    values = [1, 2, 3, 1, 4]
+    assert range_is_unique(values, 0, 2) is True
+
+    # Test 2: a range containing a duplicate.
+    values = [1, 2, 3, 1, 4]
+    assert range_is_unique(values, 0, 3) is False
+
+    # Test 3: a one-element range is always unique.
+    assert range_is_unique([7], 0, 0) is True
+
+    # Test 4: an empty range has no duplicate values.
+    assert range_is_unique([1, 2, 3], 2, 1) is True
+
+    pass
