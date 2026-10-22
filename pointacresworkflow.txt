@@ -1,6 +1,6 @@
 GOOGLE STUDY PATH — GUIDED INTERVIEW PRACTICE
 
-Source: google-study-path/00 STUDY PATH - Google (167).pdf.
+Source: 00 STUDY PATH - Google (167).pdf in the repository root.
 Read the current PDF directly before choosing or explaining each question.
 Verify the exact title, inputs, return value, examples, follow-up order and scope.
 Do not substitute a different variant or call a simple baseline optimal.
