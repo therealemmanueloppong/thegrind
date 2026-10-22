@@ -1,3 +1,40 @@
+## Current Google Study Path reset (October 21, 2026)
+
+This user instruction supersedes the older practice-file workflows below.
+Use pointacres.py and pointacresarchived.py exclusively for active study and
+archives. Read pointacresworkflow.txt for the current teaching sequence and
+program structure. Verify the current Google Study Path PDF before each step.
+Older Python files and recovered Sublime copies are backed up under
+recovery-backups; do not recreate old practice files unless requested.
+
+## Current full-book archive policy (October 19, 2026)
+
+This explicit user update supersedes older full-book instructions below that
+include tests or PDF/book solutions in the archive. The original Google workflow
+and its files are unchanged.
+
+- `the720.py` is the clean revision archive: ONLY Emmanuel's completed user
+  implementations, necessary shared node classes, question references with their scheduled calendar dates, and
+  clear beginner-friendly comments. Do NOT put tests, test helpers, comparison
+  classes, book/reference solutions, or a startup print in this file.
+- Before archiving, add comments explaining every meaningful line that lacks
+  them: variables vs indexes/values, state changes, bounds, stack/pointer order,
+  base cases, and why return statements are inside/outside loops. Preserve his
+  executable implementation; comments are documentation, not a rewrite.
+- Keep tests and any requested comparisons separately in `the720_checks.py`.
+  It imports the actual user classes from `the720.py`; avoid duplicate copies
+  of user implementations so tests exercise the clean archive.
+- Run `python3 -B the720_checks.py` when checking archived work. Running the
+  archive alone no longer runs tests. Verify tests before removing a completed
+  practice block and preserve unfinished work and shared definitions.
+- The October 19 cleanup annotated missing Day 2 comments and retained existing
+  Day 1 comments. All 8 solutions and 2 shared node classes have unchanged ASTs.
+  All previous test/comparison executable code was moved unchanged to the checks
+  file and passed after the move. Tests include all 12 Q53 cases for both versions.
+- All Day 1 and Day 2 guided mains (Q46-53) are complete. Day 3-4 Q54-61
+  skeletons are now prepared at Emmanuel's request; Q54 is next. No independent
+  revision or follow-up has started.
+
 # Google study workflow
 
 For the original Google study workflow, use `Google Questions - 2 column - 1 - Last 30 days.pdf`
@@ -96,15 +133,14 @@ Keep the original Google workflow and its practice/archive files separate.
 - Explain how his solution differs from the comparison: reasoning, correctness,
   readability, time/space complexity, and any useful improvement. If his approach
   is already equivalent, say so. Verify online sources when using them.
-- After each problem is completed and its user-written tests have been checked,
-  append that problem's completed work to `the720.py`, the revision archive.
-  Archive his implementation, his tests, and the labeled comparison solution
-  after discussing the comparison. Preserve all earlier archive entries; never
-  replace or truncate them. Keep question references and distinct names so
-  archived implementations and tests remain understandable and usable.
+- After each problem is completed and its tests have been checked, append ONLY
+  Emmanuel's commented implementation to `the720.py`, the clean revision archive.
+  Keep tests and requested book comparisons in `the720_checks.py` instead.
+  Preserve earlier user implementations and question references.
 - `the720study.py` is the active guided-practice file; `the720.py` is the permanent
   revision archive. After archiving a completed question, verify that the archive
-  contains its implementation, tests, and comparison, then REMOVE that completed
+  contains its commented user implementation and that separate checks pass,
+  then REMOVE that completed
   question block from the practice file, as Emmanuel requested. This brings the
   next question to the top. Preserve shared node definitions, pending skeletons,
   and all unfinished user work. Keep using the same practice file; do not create
@@ -126,11 +162,10 @@ Keep the original Google workflow and its practice/archive files separate.
   Q50 Min Stack (LC 155), Q51 Binary Search Tree Iterator (LC 173), Q52 Basic
   Calculator II (LC 227), Q53 Verify Preorder Sequence in Binary Search Tree
   (LC 255). These match the dated tracker and current source PDF pages
-  119, 121, 123, and 125. All four skeletons are saved in `the720study.py`,
-  with signatures, problem notes, empty bodies, and test areas only.
-- Next learning question when Emmanuel is ready: Q50 Min Stack. Explain the
-  problem and examples first, check understanding, then guide one coding step
-  at a time. Let him interpret technical terms before providing definitions.
+  119, 121, 123, and 125. All four Day 2 mains (Q50-53) are complete in `the720.py`; their tests are in `the720_checks.py`.
+  `the720study.py` retains shared definitions and no unfinished question.
+- Day 2 guided learning is complete. Independent revision of Day 2 has not begun.
+  Do not begin follow-ups or a new day without following Emmanuel's next instruction.
 
 ## Full-book independent revision routine (requested October 17, 2026)
 
@@ -172,3 +207,125 @@ explicit change to this plan.
 - Preserve earlier archive entries. An additional independently completed
   attempt may be appended with a clear revision label; never overwrite the
   learning solution or claim a revision occurred before it has happened.
+
+## Phone practice update (October 17, 2026)
+
+- During phone practice, review code pasted in chat as the active draft. Give one
+  small instruction/question at a time as comments inside a code block in chat.
+- When a solution is complete, save the user's code in `the720study.py`, write
+  and run meaningful tests yourself (explicit phone-mode exception to user-written
+  tests), explain expected results, then archive completed work in `the720.py`.
+- Q50 Min Stack: user completed the parallel-list implementation in chat and
+  explained that storing minimums avoids rescanning the value stack. Assistant
+  tests cover minimum restoration, duplicate minimums, and empty/reuse. All three
+  passed before archiving. The PDF comparison uses the same algorithm; this
+  equivalence was explained. No independent revision or follow-up has started.
+- Day 2 Q50-53 are archived; no active skeleton remains. Do not commit/push to GitHub unless
+  requested; saving on the Mac and archiving are the authorized phone workflow.
+
+## Q51 completion (October 18, 2026)
+
+- User completed BSTIterator on Mac and explained why next moves right then
+  walks left. Guided corrections covered tree .left vs linked-list .next,
+  self.stack naming, leftward movement, and accessing .left on None.
+- User explicitly requested the assistant finish tests to move to the next main.
+  Four assistant-written scenarios passed on both implementations: singleton,
+  branching tree, left-only tree, and right-only tree. Each checks repeated
+  hasNext calls and exhaustion. Entire archive ran successfully after appending.
+- User implementation, tests, and PDF helper-method comparison are archived in
+  the720.py; earlier archive content is unchanged. Q51 is removed from active
+  practice. Q52 Basic Calculator II is next; Q53 remains an untouched skeleton.
+- No independent revision or follow-up has been completed. Return to user-written
+  tests on Mac for later questions unless Emmanuel requests otherwise.
+
+## Q52 completion (October 18, 2026)
+
+- Emmanuel dictated the stack calculator line by line; assistant saved only the
+  agreed steps. The completed implementation is archived unchanged in `the720.py`.
+- At his request, 15 assistant-written tests with expected-result explanations
+  were saved and run. All passed, covering precedence, zero, multi-digit numbers,
+  spaces, signed truncation, left-to-right division/multiplication, and max integer.
+- Matching PDF stack comparison and its 15 checks are also archived. Full archive
+  assertions and practice assertions passed before removal of the completed block.
+- Discussed that an O(1)-space alternative exists; user explicitly did not request
+  its code. Keep that alternative uncoded. No independent revision or follow-up.
+- Q52 removed from active practice after verifying the archive. Q53 Verify Preorder
+  Sequence in Binary Search Tree is the sole pending skeleton. Explain the problem
+  and examples, then check understanding before any coding.
+
+## Q53 completion (October 19, 2026)
+
+- Emmanuel completed the main preorder verification using a stack and lower bound.
+  His implementation was preserved without algorithm changes. At his explicit
+  request, 12 assistant-written test cases with expected-result explanations
+  were added, run, and archived. Coverage includes both PDF examples, valid
+  [8,4,2,6,10], invalid [8,4,10,2], a single node, left/right chains, nested
+  ancestor violations, nested valid subtrees, and ascending/descending inputs
+  of 10,000 unique values. All passed; input-preservation checks also passed.
+- Matching PDF comparison is algorithmically equivalent, O(n) time/O(n) space.
+  Its same 12 tests passed. Full archive assertions passed after appending;
+  existing archive prefix was verified unchanged before practice cleanup.
+- All Day 2 mains Q50-53 are complete for guided learning and archived in
+  `the720.py`. Completed Q53 removed from `the720study.py` after verification;
+  shared definitions preserved. No new question or follow-up prepared.
+- Independent understanding still needs revision: user initially thought 8->4
+  violated preorder; clarified that descending left is valid and a cutoff
+  applies only after entering an ancestor's right subtree. Also corrected
+  maximum-so-far vs lower-bound reasoning, if vs while, and storing the popped
+  cutoff in lower_bound. Do not infer independent mastery from passing tests.
+- Emmanuel requests full current question code shown in chat at each coding
+  step, with the next instruction as comments and explicit placement.
+
+## October 18-19 scheduled set prepared (October 19, 2026)
+
+- User requested all eight scheduled question skeletons in `the720study.py`.
+  October 18: Q54 Remove Duplicate Letters, Q55 Decode String, Q56 Remove K
+  Digits, Q57 Convert BST to Sorted Doubly Linked List. October 19: Q58 Ternary
+  Expression Parser, Q59 Add Two Numbers II, Q60 132 Pattern, Q61 Find Permutation.
+- Verified dated rows in the saved tracker schedule.json under Documents/Codex/
+  2026-10-16/https-chatgpt-com-share-6ad1bad4-60f4/work/. Verified signatures,
+  wording and examples against source PDF pages 127,129,131,133-134,135,137,139,141.
+- All eight skeletons include names, type signatures, question notes and examples,
+  with pass bodies only. No algorithms, implementations or tests supplied. Shared
+  TreeNode/ListNode preserved; Node interface added for LC426 left/right links.
+- Next learning question: Q54 Remove Duplicate Letters. Explain input/output and
+  examples, check understanding, then guide one small coding step at a time.
+- Continue the clean archive policy: only commented user solutions in the720.py;
+  tests and book comparisons stay separate in the720_checks.py.
+
+## Study chat consolidation (October 19, 2026)
+
+- Emmanuel noticed the accidental separate chat "Find the 720 Grind (3)" and
+  asked to merge its progress into the original study chat. Its recent turns
+  were read and checked against the shared saved `the720study.py`. Message
+  histories cannot be literally merged with the available tools. Continue here
+  using the existing files; no source edits or duplicate work are necessary.
+- Active question is Q54 Remove Duplicate Letters, still unfinished. Saved code:
+  Counter import; stack=[]; seen=set(); counts=Counter(s); for c in s; decrement
+  counts[c]; if c in seen: continue. No tests or archiving for Q54 yet.
+- Reviewed pitfalls in the other chat: Python compares letters directly, so an
+  alphabet helper array is unnecessary; Counter(s) initially counts all
+  occurrences and decrementing makes it count occurrences still ahead; mark
+  a letter seen only when it is actually kept in stack.
+- Exact pending teaching example: s="bab", stack=['b'], current c='a', and
+  counts['b']=1. Ask whether to keep the first b before a or remove it and use
+  the later b, and ask why. Wait for his reasoning before introducing the
+  stack-removal condition. No full solution or future steps revealed.
+- Q55-61 remain untouched skeletons. All clean-archive and slow teaching
+  preferences remain in effect. No other chat was messaged, archived or deleted.
+
+## Q54 completion and dated archive headings (October 19, 2026)
+
+- Q54 Remove Duplicate Letters: completed user code archived with a purpose
+  comment on every meaningful line. AST verified unchanged. Eight fixed tests
+  passed before archiving, then all existing checks passed against the archive.
+  Tests and expected-result explanations are only in the720_checks.py. No book
+  solution was added to the clean archive.
+- Removed Q54 from practice only after archive verification. Q55 Decode String
+  is now first; Q55-61 skeletons and helpers were preserved. Explain Q55 and
+  examples, check understanding, then begin one coding step at a time.
+- At Emmanuel's request, every archive question heading now includes its
+  SCHEDULED date, day number, PDF question, LC number, and title. Dates were
+  checked against saved schedule.json: Day 1 Oct 16, Day 2 Oct 17, Day 3 Oct 18.
+  These labels are scheduled study dates, not claims of actual completion dates.
+  Use this heading format for every future archived question too.

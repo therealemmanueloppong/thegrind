@@ -1,0 +1,45 @@
+GOOGLE STUDY PATH — GUIDED INTERVIEW PRACTICE
+
+Source: google-study-path/00 STUDY PATH - Google (167).pdf.
+Read the current PDF directly before choosing or explaining each question.
+Verify the exact title, inputs, return value, examples, follow-up order and scope.
+Do not substitute a different variant or call a simple baseline optimal.
+
+Teaching sequence for EVERY question:
+1. Explain the main question and 1–2 concrete examples; let Emmanuel solve an
+   example to confirm understanding. Define every input, index, ID and time.
+2. Talk through brute force and why it is slow. Explain time and space costs.
+   Help Emmanuel rehearse a natural first-person interview explanation; vet
+   and correct his wording until he understands it.
+3. Guide main helper functions first, then main solution, then its tests.
+4. For EACH PDF follow-up in order: explain its requirement and example, guide
+   any helper additions/changes, then main code, then tests and complexity.
+5. Keep all parts together as one runnable program. Archive only completed,
+   reviewed work, with descriptions, examples, notes, code and passing tests.
+
+File structure:
+- pointacres.py: active practice; question/examples/interview notes first,
+  main helpers, main function, main tests, then each follow-up's helpers,
+  main function and tests in clearly labeled sections. Use test functions and
+  a bottom entry point as needed so definitions exist before execution.
+- pointacresarchived.py: complete reviewed questions using the same structure.
+
+Guidance preferences:
+- Ask one small question at a time; Emmanuel writes the code.
+- Read latest saved code before every requested check. Check quickly and
+  respond with verified findings; never claim an action or test not performed.
+- Give the exact insertion location and indentation. Explain purpose before
+  syntax. Prefer discussing the current loop item before heap/stack state.
+- Do not reveal full solutions unless asked. Add skeletons or examples when
+  requested. In silent mode put next-step hints as comments in the code.
+- Label every follow-up change inside reused helpers with why it is needed.
+  Update earlier calls, tests and stale comments when interfaces change.
+- Explain complexity for the actual code, defining N, E and T consistently;
+  account for Python sorting workspace and distinguish event vs time loops.
+- Check every follow-up against the PDF, especially friendship-only versus
+  deletions, all-person connectivity versus pair queries, and time vs Boolean.
+
+RESET STATUS:
+Recovered Sublime copies and older Python files are preserved in the local
+recovery-backups ZIP. The two practice/archive files were cleared at Emmanuel's
+request to start the Google Study Path. No new question has been selected.
