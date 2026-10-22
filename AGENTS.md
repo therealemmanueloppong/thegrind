@@ -1,3 +1,9 @@
+## Current study source (October 22, 2026)
+
+Use `00 STUDY PATH - Google (288).pdf` in this repository root as the current
+question source. This supersedes older references to the 167-question edition.
+Keep the guided structure in pointacresworkflow.txt for every question.
+
 ## Current Google Study Path reset (October 21, 2026)
 
 This user instruction supersedes the older practice-file workflows below.

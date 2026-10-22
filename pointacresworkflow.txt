@@ -1,6 +1,7 @@
 GOOGLE STUDY PATH — GUIDED INTERVIEW PRACTICE
 
-Source: 00 STUDY PATH - Google (167).pdf in the repository root.
+Source: 00 STUDY PATH - Google (288).pdf in the repository root.
+Current source confirmed by Emmanuel on October 22, 2026.
 Read the current PDF directly before choosing or explaining each question.
 Verify the exact title, inputs, return value, examples, follow-up order and scope.
 Do not substitute a different variant or call a simple baseline optimal.
@@ -43,3 +44,10 @@ RESET STATUS:
 Recovered Sublime copies and older Python files are preserved in the local
 recovery-backups ZIP. The two practice/archive files were cleared at Emmanuel's
 request to start the Google Study Path. No new question has been selected.
+
+CURRENT REFERENCE PASS (October 22, 2026):
+Emmanuel explicitly requested complete reference answers for Topic 1 Q1-9 in
+pointacres.py, including PDF follow-ups, examples, complexities and tests.
+These are reference answers, not evidence of independent mastery. He will
+study them then implement in learn.py. Preserve learn.py and give incremental
+nudges when reviewing his attempts. All 33 reference test groups passed.
