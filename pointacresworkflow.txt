@@ -1,7 +1,9 @@
 GOOGLE STUDY PATH — GUIDED INTERVIEW PRACTICE
 
-Source: 00 STUDY PATH - Google (288).pdf in the repository root.
-Current source confirmed by Emmanuel on October 22, 2026.
+Source: 00 STUDY PATH CLEAN FULL CODE - MEDIUM - Google (197).pdf in the repository root.
+Current source selected by Emmanuel on October 23, 2026.
+Focus on this Medium-only edition; verify its numbering and examples directly.
+Earlier 288-question reference code remains historical study material.
 Read the current PDF directly before choosing or explaining each question.
 Verify the exact title, inputs, return value, examples, follow-up order and scope.
 Do not substitute a different variant or call a simple baseline optimal.

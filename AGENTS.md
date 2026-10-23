@@ -1,3 +1,9 @@
+## Current study source (October 23, 2026)
+
+Use `00 STUDY PATH CLEAN FULL CODE - MEDIUM - Google (197).pdf` as the
+current source, superseding earlier source selections below. Preserve the
+helper/main/tests/follow-up teaching structure in pointacresworkflow.txt.
+
 ## Current study source (October 22, 2026)
 
 Use `00 STUDY PATH - Google (288).pdf` in this repository root as the current
